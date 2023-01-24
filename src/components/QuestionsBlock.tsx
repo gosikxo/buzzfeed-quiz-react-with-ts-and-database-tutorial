@@ -1,7 +1,12 @@
 import React from 'react'
+import { Content } from '../../interfaces'
 
-export const QuestionBlock = () => {
+export const QuestionsBlock = ({ quizItem }: {
+  quizItem: Content
+}) => {
   return (
-    <div></div>
+    <div>
+      <h2 id={String(quizItem.id)}>{quizItem.text}</h2>
+    </div>
   )
 }
