@@ -6,6 +6,7 @@ import { QuestionsBlock } from './components/QuestionsBlock'
 const App = () => {
   const [quiz, setQuiz] = useState<QuizData | null>()
   const [chosenAnswerItems, setChosenAnswerItems] = useState<string[]>([])
+  const [unansweredQuestionIds, setUnansweredQuestionIds] = useState<number[] | undefined>([])
 
   console.log(chosenAnswerItems)
 
@@ -23,19 +24,28 @@ const App = () => {
     fetchData()
   }, [])
 
+  useEffect(() => {
+    const unasweredIds = quiz?.content?.map(({ id } : Content) => id)
+    setUnansweredQuestionIds(unasweredIds)
+  }, [quiz])
 
-  return (
-    <div className="app">
-      <Title title={quiz?.title} subtitle={quiz?.subtitle} />
-      {quiz?.content.map((content: Content, id: Content['id']) => (
-        <QuestionsBlock
-          key={id}
-          quizItem={content}
-          setChosenAnswerItems={setChosenAnswerItems}
-        />
-      ))}
-    </div>
-  )
+  console.log(unansweredQuestionIds)
+
+
+return (
+  <div className="app">
+    <Title title={quiz?.title} subtitle={quiz?.subtitle} />
+    {quiz?.content.map((content: Content, id: Content['id']) => (
+      <QuestionsBlock
+        key={id}
+        quizItem={content}
+        setChosenAnswerItems={setChosenAnswerItems}
+        unansweredQuestionIds={unansweredQuestionIds}
+        setUnansweredQuestionIds={setUnansweredQuestionIds}
+      />
+    ))}
+  </div>
+)
 }
 
 export default App

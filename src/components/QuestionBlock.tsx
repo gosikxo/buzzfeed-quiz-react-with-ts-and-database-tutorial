@@ -1,13 +1,23 @@
 import React from 'react'
 import { Question } from '../../interfaces'
 
-export const QuestionBlock = ({ question, setChosenAnswerItems }: {
+export const QuestionBlock = ({
+    question,
+    setChosenAnswerItems,
+    setUnansweredQuestionIds,
+    unansweredQuestionIds,
+    quizItemId
+}: {
     question: Question,
-    setChosenAnswerItems: Function
+    setChosenAnswerItems: Function,
+    setUnansweredQuestionIds: Function,
+    unansweredQuestionIds: number[] | undefined,
+    quizItemId: number
 }) => {
 
     const handleClick = () => {
         setChosenAnswerItems((prevState: string[]) => [...prevState, question.text])
+        setUnansweredQuestionIds(unansweredQuestionIds?.filter((id) => id !== quizItemId))
     }
 
 
