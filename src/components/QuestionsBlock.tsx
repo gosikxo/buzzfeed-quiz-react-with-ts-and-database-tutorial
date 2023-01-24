@@ -7,7 +7,7 @@ export const QuestionsBlock = ({ quizItem }: {
 }) => {
   return (
     <div>
-      <h2 id={String(quizItem.id)}>{quizItem.text}</h2>
+      <h2 id={String(quizItem.id)} className='title-block'>{quizItem.text}</h2>
       <div className='questions-container'>
         {quizItem?.questions.map((question: Question, _index) => (
           <QuestionBlock

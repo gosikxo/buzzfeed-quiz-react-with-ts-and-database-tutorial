@@ -23,7 +23,7 @@ const App = () => {
   console.log(quiz)
 
   return (
-    <div className="App">
+    <div className="app">
       <Title title={quiz?.title} subtitle={quiz?.subtitle} />
       {quiz?.content.map((content: Content, id: Content['id']) => (
         <QuestionsBlock
