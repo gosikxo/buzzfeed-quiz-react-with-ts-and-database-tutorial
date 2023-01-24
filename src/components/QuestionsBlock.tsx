@@ -6,12 +6,14 @@ export const QuestionsBlock = ({
   quizItem,
   setChosenAnswerItems,
   setUnansweredQuestionIds,
-  unansweredQuestionIds
+  unansweredQuestionIds,
+  chosenAnswerItems
 }: {
   quizItem: Content,
   setChosenAnswerItems: Function,
   setUnansweredQuestionIds: Function,
-  unansweredQuestionIds: number[] | undefined
+  unansweredQuestionIds: number[] | undefined,
+  chosenAnswerItems: string[]
 }) => {
   return (
     <div>
@@ -25,6 +27,7 @@ export const QuestionsBlock = ({
             setUnansweredQuestionIds={setUnansweredQuestionIds}
             unansweredQuestionIds={unansweredQuestionIds}
             quizItemId={quizItem.id}
+            chosenAnswerItems={chosenAnswerItems}
           />
         ))}
       </div>

@@ -41,6 +41,7 @@ return (
         quizItem={content}
         setChosenAnswerItems={setChosenAnswerItems}
         unansweredQuestionIds={unansweredQuestionIds}
+        chosenAnswerItems={chosenAnswerItems}
         setUnansweredQuestionIds={setUnansweredQuestionIds}
       />
     ))}

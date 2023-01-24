@@ -6,13 +6,15 @@ export const QuestionBlock = ({
     setChosenAnswerItems,
     setUnansweredQuestionIds,
     unansweredQuestionIds,
-    quizItemId
+    quizItemId,
+    chosenAnswerItems
 }: {
     question: Question,
     setChosenAnswerItems: Function,
     setUnansweredQuestionIds: Function,
     unansweredQuestionIds: number[] | undefined,
-    quizItemId: number
+    quizItemId: number,
+    chosenAnswerItems: string[]
 }) => {
 
     const handleClick = () => {
@@ -20,11 +22,15 @@ export const QuestionBlock = ({
         setUnansweredQuestionIds(unansweredQuestionIds?.filter((id) => id !== quizItemId))
     }
 
+    const validPick = !chosenAnswerItems?.includes(question.text) &&
+    !unansweredQuestionIds?.includes(quizItemId)
+
 
     return (
         <button
             className='question-block'
             onClick={handleClick}
+            disabled={validPick}
         >
             <img src={question.image} alt={question.alt} />
             <h3>{question.text}</h3>
