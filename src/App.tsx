@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { Title } from './components/Title'
 import { Content, QuizData } from '../interfaces'
 import { QuestionsBlock } from './components/QuestionsBlock'
+import { AnswerBlock } from './components/AnswerBlock'
 
 const App = () => {
   const [quiz, setQuiz] = useState<QuizData | null>()
   const [chosenAnswerItems, setChosenAnswerItems] = useState<string[]>([])
   const [unansweredQuestionIds, setUnansweredQuestionIds] = useState<number[] | undefined>([])
+  const [showAnswer, setShowAnswer] = useState<boolean>(false)
 
   console.log(chosenAnswerItems)
 
@@ -31,11 +33,16 @@ const App = () => {
 
   useEffect(() => {
     if (unansweredQuestionIds) {
+      if (unansweredQuestionIds.length <= 0 && chosenAnswerItems.length >= 1) {
+        setShowAnswer(true)
+        const answerBlock = document.getElementById('answer-block')
+        answerBlock?.scrollIntoView({ behavior: 'smooth' })
+      }
       const highestId = Math.min(...unansweredQuestionIds)
       const highestElement = document.getElementById(String(highestId))
       highestElement?.scrollIntoView({ behavior: 'smooth' })
     }
-  }, [unansweredQuestionIds])
+  }, [unansweredQuestionIds, chosenAnswerItems, setShowAnswer])
 
   return (
     <div className="app">
@@ -50,6 +57,7 @@ const App = () => {
           setUnansweredQuestionIds={setUnansweredQuestionIds}
         />
       ))}
+      {showAnswer && <AnswerBlock answerOptions={quiz?.answers} chosenAnswers={chosenAnswerItems}/>}
     </div>
   )
 }
